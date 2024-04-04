@@ -2,24 +2,15 @@ package com.example.driverhire2.client;
 
 public class OrganizationClient extends Client{
 
-    String companyName;
     String taxNumber;
 
     public OrganizationClient() {
     }
 
-    public OrganizationClient(String contact, String email, String address, String companyName, String taxNumber, String type) {
-        super(contact, email, address, type);
-        this.companyName = companyName;
+    public OrganizationClient(String contact, String email, String address, String name, String taxNumber, String type) {
+        super(contact, email, address, type, name);
+
         this.taxNumber = taxNumber;
-    }
-
-    public String getCompanyName() {
-        return companyName;
-    }
-
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
     }
 
     public String getTaxNumber() {
@@ -33,7 +24,7 @@ public class OrganizationClient extends Client{
     @Override
     public String toString() {
         return "OrganizationClient{" +
-                "companyName='" + companyName + '\'' +
+                "companyName='" + name + '\'' +
                 ", taxNumber='" + taxNumber + '\'' +
                 ", ID=" + ID +
                 ", contact='" + contact + '\'' +

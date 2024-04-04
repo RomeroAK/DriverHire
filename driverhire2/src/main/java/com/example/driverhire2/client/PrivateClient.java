@@ -10,18 +10,10 @@ public class PrivateClient extends Client{
     }
 
     public PrivateClient(String contact,String type, String email, String address, String name, String lastName, String idNumber) {
-        super(contact, email, address, type);
-        this.name = name;
+        super(contact, email, address, type, name);
+
         this.lastName = lastName;
         this.idNumber = idNumber;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getLastName() {

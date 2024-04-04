@@ -42,7 +42,7 @@ public class ClientService {
     }
 
     @Transactional
-    public void updateDriver(Long clientId, String email, String address, String contact, String type)
+    public void updateDriver(Long clientId, String email, String address, String contact, String type, String name)
     {
         Client clientToUpdate  = clientRepository.findbyIdnumber(email)
                 .orElseThrow(()-> new IllegalStateException("Client with " + email + "does not exist"));
@@ -54,6 +54,7 @@ public class ClientService {
                 PrivateClient privateClient = (PrivateClient) clientToUpdate;
                 privateClient.setContact(contact);
                 privateClient.setAddress(address);
+
             }
         }
 

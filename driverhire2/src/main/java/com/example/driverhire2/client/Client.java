@@ -16,15 +16,25 @@ public class Client {
     String address;
 
     String type;
+    String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public Client() {
     }
 
-    public Client(String contact, String email, String address, String type) {
+    public Client(String contact, String email, String address, String type, String name) {
         this.contact = contact;
         this.email = email;
         this.address = address;
         this.type = type;
+        this.name = name;
     }
 
     public Long getID() {
@@ -74,6 +84,7 @@ public class Client {
                 ", contact='" + contact + '\'' +
                 ", email='" + email + '\'' +
                 ", address='" + address + '\'' +
+                ", name='" + name + '\'' +
                 '}';
     }
 }
