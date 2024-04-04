@@ -3,7 +3,7 @@ package com.example.driverhire2.driver;
 import jakarta.persistence.*;
 
 @Entity
-@Table
+@Table(name = "driver")
 public class Driver {
 
 
