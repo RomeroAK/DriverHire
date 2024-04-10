@@ -7,8 +7,8 @@ public class OrganizationClient extends Client{
     public OrganizationClient() {
     }
 
-    public OrganizationClient(String contact, String email, String address, String name, String taxNumber, String type) {
-        super(contact, email, address, type, name);
+    public OrganizationClient(String contact, String email, String address, String name, String taxNumber, String type, String password) {
+        super(contact, email, address, type, name, password);
 
         this.taxNumber = taxNumber;
     }
@@ -24,13 +24,14 @@ public class OrganizationClient extends Client{
     @Override
     public String toString() {
         return "OrganizationClient{" +
-                "companyName='" + name + '\'' +
-                ", taxNumber='" + taxNumber + '\'' +
+                "taxNumber='" + taxNumber + '\'' +
                 ", ID=" + ID +
                 ", contact='" + contact + '\'' +
                 ", email='" + email + '\'' +
                 ", address='" + address + '\'' +
+                ", password='" + password + '\'' +
                 ", type='" + type + '\'' +
+                ", name='" + name + '\'' +
                 '}';
     }
 }

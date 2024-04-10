@@ -16,15 +16,20 @@ public class Driver {
     String firstName;
     String lastName;
     String gender;
+    int experience;
 
     public Driver() {
     }
 
-    public Driver(String IDnumber, String firstName, String lastName, String gender) {
+
+
+    public Driver(String IDnumber, String firstName, String lastName, String gender, int experience) {
         this.Idnumber = IDnumber;
         this.firstName = firstName;
         this.lastName = lastName;
         this.gender = gender;
+        this.experience = experience;
+
     }
 
     public Long getID() {
@@ -67,6 +72,14 @@ public class Driver {
         this.gender = gender;
     }
 
+    public int getExperience() {
+        return experience;
+    }
+
+    public void setExperience(int experience) {
+        this.experience = experience;
+    }
+
     @Override
     public String toString() {
         return "Driver{" +
@@ -75,6 +88,7 @@ public class Driver {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", gender='" + gender + '\'' +
+                ", experience=" + experience +
                 '}';
     }
 }

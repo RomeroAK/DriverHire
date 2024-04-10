@@ -20,6 +20,7 @@ public class ClientService {
         if (client instanceof PrivateClient)
         {
             PrivateClient privateClient = (PrivateClient) client;
+            privateClient.setPassword(privateClient.password);
             privateClient.setName(privateClient.name);
             privateClient.setLastName(privateClient.lastName);
             privateClient.setIdNumber(privateClient.idNumber);
@@ -31,7 +32,7 @@ public class ClientService {
         } else if (client instanceof OrganizationClient)
         {
             OrganizationClient organizationClient = (OrganizationClient) client;
-            organizationClient.setCompanyName(organizationClient.companyName);
+            organizationClient.setName(organizationClient.name);
             organizationClient.setAddress(organizationClient.address);
             organizationClient.setEmail(organizationClient.email);
             organizationClient.setTaxNumber(organizationClient.taxNumber);

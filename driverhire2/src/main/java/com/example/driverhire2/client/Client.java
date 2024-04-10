@@ -14,9 +14,24 @@ public class Client {
     String contact;
     String email;
     String address;
+    String password;
+
+
 
     String type;
     String name;
+
+    public Client() {
+    }
+
+    public Client(String contact, String email, String address, String type, String name, String password) {
+        this.contact = contact;
+        this.email = email;
+        this.address = address;
+        this.type = type;
+        this.name = name;
+        this.password = password;
+    }
 
     public String getName() {
         return name;
@@ -25,16 +40,12 @@ public class Client {
     public void setName(String name) {
         this.name = name;
     }
-
-    public Client() {
+    public String getPassword() {
+        return password;
     }
 
-    public Client(String contact, String email, String address, String type, String name) {
-        this.contact = contact;
-        this.email = email;
-        this.address = address;
-        this.type = type;
-        this.name = name;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public Long getID() {

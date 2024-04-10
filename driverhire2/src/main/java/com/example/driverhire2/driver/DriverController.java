@@ -1,17 +1,20 @@
 package com.example.driverhire2.driver;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Repository;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@Controller
+import java.util.List;
+import java.util.Optional;
+
+@RestController
+@RequestMapping("api/drivers")
 public class DriverController {
 
     private final DriverService driverService;
 
-    @Autowired
-    public DriverController(DriverService driverService) {
+
+    @Autowired DriverController(DriverService driverService) {
         this.driverService = driverService;
     }
 
@@ -26,5 +29,23 @@ public class DriverController {
     {
         driverService.updateDriver(ID, fName, lName, Idnumber);
 
+    }
+
+    @GetMapping
+    public List<Driver> getDrivers(Driver driver)
+    {
+        return driverService.getDrivers(driver.ID);
+    }
+
+    @DeleteMapping
+    public void deleteDriver(Driver driver)
+    {
+        driverService.deleteDriver(driver.Idnumber);
+    }
+
+    @GetMapping("/select-by-experience")
+    public ResponseEntity<Optional<Driver>> selectDriverByExperience(@RequestParam int experience) {
+        Optional<Driver> drivers = driverService.getDriverbyExperience(experience);
+        return ResponseEntity.ok(drivers);
     }
 }
