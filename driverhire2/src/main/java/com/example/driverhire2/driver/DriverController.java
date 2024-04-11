@@ -24,7 +24,7 @@ public class DriverController {
         driverService.createDriver(driver);
     }
 
-    @PutMapping
+    @PutMapping(path = "{driverId}")
     public void updateDriverDetails(@PathVariable("driverId") Long ID, @RequestParam(required = false) String fName, @RequestParam(required = false) String lName, @RequestParam(required = false) String Idnumber)
     {
         driverService.updateDriver(ID, fName, lName, Idnumber);
@@ -43,7 +43,7 @@ public class DriverController {
         driverService.deleteDriver(driver.Idnumber);
     }
 
-    @GetMapping("/select-by-experience")
+    @GetMapping(path = "{experience}")
     public ResponseEntity<Optional<Driver>> selectDriverByExperience(@RequestParam int experience) {
         Optional<Driver> drivers = driverService.getDriverbyExperience(experience);
         return ResponseEntity.ok(drivers);
