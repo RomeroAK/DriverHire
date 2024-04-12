@@ -18,14 +18,16 @@ public class DriverService {
         this.driverRepository = driverRepository;
     }
 
-    public Driver createDriver(Driver driver)
+    public void createDriver(Driver driver)
     {
-        driver.setFirstName(driver.firstName);
-        driver.setLastName(driver.lastName);
-        driver.setGender(driver.gender);
-        driver.setIdnumber(driver.Idnumber);
+        Optional<Driver> tempDriver = driverRepository.findbyIdnumber(driver.getIDnumber());
 
-        return driver;
+        if(tempDriver.isPresent())
+        {
+            throw new IllegalStateException("ID Number already exists");
+        }
+
+        driverRepository.save(driver);
     }
 
     @Transactional

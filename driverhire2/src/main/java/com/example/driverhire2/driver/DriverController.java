@@ -24,10 +24,10 @@ public class DriverController {
         driverService.createDriver(driver);
     }
 
-    @PutMapping(path = "{driverId}")
-    public void updateDriverDetails(@PathVariable("driverId") Long ID, @RequestParam(required = false) String fName, @RequestParam(required = false) String lName, @RequestParam(required = false) String Idnumber)
+    @PutMapping(path = "{IdNumber}")
+    public void updateDriverDetails(@PathVariable("idNumber") String idNumber, @RequestParam(required = false) String fName, @RequestParam(required = false) String lName, @RequestParam(required = false) Long ID)
     {
-        driverService.updateDriver(ID, fName, lName, Idnumber);
+        driverService.updateDriver(ID, fName, lName, idNumber);
 
     }
 
@@ -37,10 +37,10 @@ public class DriverController {
         return driverService.getDrivers(driver.ID);
     }
 
-    @DeleteMapping
-    public void deleteDriver(Driver driver)
+    @DeleteMapping(path = "{Idnumber}")
+    public void deleteDriver(@PathVariable ("Idnumber") String Idnumber)
     {
-        driverService.deleteDriver(driver.Idnumber);
+        driverService.deleteDriver(Idnumber);
     }
 
     @GetMapping(path = "{experience}")

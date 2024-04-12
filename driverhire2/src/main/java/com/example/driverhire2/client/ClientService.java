@@ -1,9 +1,11 @@
 package com.example.driverhire2.client;
 
-import com.example.driverhire2.driver.Driver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ClientService {
@@ -15,50 +17,75 @@ public class ClientService {
         this.clientRepository = clientRepository;
     }
 
-    public Client createClient(Client client)
+    public void createClient(Client client)
     {
         if (client instanceof PrivateClient)
         {
-            PrivateClient privateClient = (PrivateClient) client;
-            privateClient.setPassword(privateClient.password);
-            privateClient.setName(privateClient.name);
-            privateClient.setLastName(privateClient.lastName);
-            privateClient.setIdNumber(privateClient.idNumber);
-            privateClient.setAddress(privateClient.address);
-            privateClient.setContact(privateClient.contact);
-            privateClient.setEmail(privateClient.email);
-            privateClient.setType(privateClient.type);
+            Optional<Client> tempPrivateClient = clientRepository.findbyEmail(client.getEmail());
+
+            if(tempPrivateClient.isPresent())
+            {
+                throw new IllegalStateException("This email already exists");
+
+            }
+
+            clientRepository.save(client);
 
         } else if (client instanceof OrganizationClient)
         {
-            OrganizationClient organizationClient = (OrganizationClient) client;
-            organizationClient.setName(organizationClient.name);
-            organizationClient.setAddress(organizationClient.address);
-            organizationClient.setEmail(organizationClient.email);
-            organizationClient.setTaxNumber(organizationClient.taxNumber);
-            organizationClient.setType(organizationClient.type);
+            Optional<Client> tempOrganizationClient = clientRepository.findbyEmail(client.getEmail());
+
+            if(tempOrganizationClient.isPresent())
+            {
+                throw new IllegalStateException("This email a;ready exists");
+
+            }
+
+            clientRepository.save(client);
 
         }
-        return client;
+
     }
 
     @Transactional
-    public void updateDriver(Long clientId, String email, String address, String contact, String type, String name)
+    public void updateDriver(Long clientId, String email, String address, String contact, String type, String name, String taxNumber)
     {
-        Client clientToUpdate  = clientRepository.findbyIdnumber(email)
+        Client clientToUpdate  = clientRepository.findbyEmail(email)
                 .orElseThrow(()-> new IllegalStateException("Client with " + email + "does not exist"));
 
         if(clientToUpdate != null)
         {
-            if(type.equalsIgnoreCase("privatclient") && clientToUpdate instanceof PrivateClient)
+            if(type.equalsIgnoreCase("Private") && clientToUpdate instanceof PrivateClient)
             {
                 PrivateClient privateClient = (PrivateClient) clientToUpdate;
                 privateClient.setContact(contact);
                 privateClient.setAddress(address);
 
+            } else if (type.equalsIgnoreCase("Organization") && clientToUpdate instanceof OrganizationClient)
+            {
+                OrganizationClient organizationClient = (OrganizationClient) clientToUpdate;
+                organizationClient.setAddress(address);
+                organizationClient.setName(name);
+                organizationClient.setTaxNumber(taxNumber);
             }
         }
 
+    }
+
+    public void deleteClient(Long clientID)
+    {
+        Optional<Client> tempClient = clientRepository.findbyID(clientID);
+        if(tempClient.isEmpty())
+        {
+            throw new IllegalStateException("Email" + clientID + " doesn't exist. Please enter another email.");
+        }
+        clientRepository.deleteById(clientID);
+    }
+
+    public List<Client> getClients(Long clientID)
+    {
+        List<Client> clientsList = clientRepository.findAll();
+        return clientsList;
     }
 }
 
