@@ -24,7 +24,7 @@ public class DriverController {
         driverService.createDriver(driver);
     }
 
-    @PutMapping(path = "{IdNumber}")
+    @DeleteMapping(path = "idNumber/{idNumber}")
     public void updateDriverDetails(@PathVariable("idNumber") String idNumber, @RequestParam(required = false) String fName, @RequestParam(required = false) String lName, @RequestParam(required = false) Long ID)
     {
         driverService.updateDriver(ID, fName, lName, idNumber);
@@ -37,15 +37,30 @@ public class DriverController {
         return driverService.getDrivers(driver.ID);
     }
 
-    @DeleteMapping(path = "{Idnumber}")
+    @DeleteMapping(path = "Idnumber/{Idnumber}")
     public void deleteDriver(@PathVariable ("Idnumber") String Idnumber)
     {
         driverService.deleteDriver(Idnumber);
     }
 
-    @GetMapping(path = "{experience}")
+    @GetMapping(path = "experience/{experience}")
     public ResponseEntity<Optional<Driver>> selectDriverByExperience(@RequestParam int experience) {
-        Optional<Driver> drivers = driverService.getDriverbyExperience(experience);
+        Optional<Driver> drivers = driverService.getByExperience(experience);
         return ResponseEntity.ok(drivers);
+    }
+
+    @GetMapping(path = "experienceTest/{experience}")
+    public List<Driver> getByExp(@RequestParam int exp) {
+        List<Driver> listByExp = driverService.getByExp(exp);
+
+        return listByExp;
+    }
+
+    @GetMapping(path = "license/{licenseType}")
+    public Optional<Driver> getByLicenseType (@RequestParam String licenseType){
+
+        Optional<Driver> listByLicense = driverService.getByLicenseType(licenseType);
+
+        return listByLicense;
     }
 }

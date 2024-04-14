@@ -16,6 +16,10 @@ public interface DriverRepository extends JpaRepository<Driver, Long> {
     @Query("SELECT d FROM Driver d WHERE d.experience = ?1")
    Optional<Driver> getByExperience(int experience);
 
+    @Query("SELECT d FROM Driver d WHERE d.experience = ?1")
+    public List<Driver> getByExp (int exp);
 
 
+    @Query("SELECT d FROM Driver d WHERE d.licenseType = ?1")
+    Optional<Driver> getByLicenseType(String licenseType);
 }

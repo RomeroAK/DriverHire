@@ -56,8 +56,24 @@ public class DriverService {
         driverRepository.delete(driver);
     }
 
-    public Optional<Driver> getDriverbyExperience (int exp)
+    public Optional<Driver> getByExperience (int exp)
     {
        return driverRepository.getByExperience(exp);
+    }
+    public Optional<Driver> getByLicenseType (String licenseType)
+    {
+        if(licenseType.isEmpty())
+        {
+            throw new IllegalStateException("This license type ' " + licenseType +
+                    " ' is not correct. Please enter the correct LicenseType@!");
+        }
+       return driverRepository.getByLicenseType(licenseType);
+    }
+
+    public List<Driver> getByExp(int exp)
+    {
+       List<Driver> listByExp =  driverRepository.getByExp(exp);
+
+       return listByExp;
     }
 }
